@@ -7,7 +7,7 @@ namespace LeetCode
     static void Main(string[] args)
     {
         ArraysAndHashing arraysAndHashing = new ArraysAndHashing();
-        arraysAndHashing.TestGroupAnagrams();
+        arraysAndHashing.TestTopKFrequent();
     }
   }
 }

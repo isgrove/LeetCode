@@ -84,7 +84,8 @@ public class ArraysAndHashing
       }
       prev[nums[i]] = i;
     }
-    return null;
+
+    throw new ArgumentException("No Two Sum solution");
   }
 
   public void TestTwoSum()
@@ -133,6 +134,58 @@ public class ArraysAndHashing
       }
       msg += "]";
       System.Console.WriteLine(msg);
+    }
+  }
+
+  // Given an integer array nums and an integer k, return the k most frquent elements. You may return the answer in any order.
+  // https://leetcode.com/problems/top-k-frequent-elements/
+  public int[] TopKFrequent(int[] nums, int k)
+  {
+    var count = new Dictionary<int, int>();
+    var frequency = new List<int>[nums.Length + 1];
+    var result = new int[k];
+    var added = 0;
+
+    for (int i = 0; i <= nums.Length; i++)
+    {
+      frequency[i] = new List<int>();
+    }
+
+    foreach (int num in nums)
+    {
+      count[num] = 1 + count.GetValueOrDefault(num);
+    }
+
+    foreach (KeyValuePair<int, int> kvp in count)
+    {
+      frequency[kvp.Value].Add(kvp.Key);
+    }
+
+    for (int i = nums.Length; i > 0; i--)
+    {
+      foreach (var n in frequency[i])
+      {
+        result[added] = n;
+        added++;
+        if (added == k)
+        {
+          return result;
+        }
+      }
+    }
+    throw new ArgumentException("No Top K Frequency solution");
+  }
+
+  public void TestTopKFrequent()
+  {
+    var nums1 = new int[] { 1, 1, 1, 2, 2, 3 };
+    var k1 = 2;
+    var result1 = TopKFrequent(nums1, k1);
+
+    System.Console.WriteLine("Result 1:");
+    foreach (var num in result1)
+    {
+      System.Console.WriteLine(num);
     }
   }
 }
